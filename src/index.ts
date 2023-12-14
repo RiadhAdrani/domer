@@ -14,14 +14,7 @@ export enum Namespace {
   MATH = 'http://www.w3.org/1998/Math/MathML',
 }
 
-export const EventModifiersList = [
-  'stop',
-  'prevent',
-  'self',
-  'capture',
-  'once',
-  'passive',
-] as const;
+export const EventModifiers = ['stop', 'prevent', 'self', 'capture', 'once', 'passive'] as const;
 
 let $config: LibraryConfig = {};
 
@@ -162,7 +155,7 @@ export const extractEventDetails = (
     .substring(modifierStart + 1)
     .split('-')
     .reduce((acc, modifier) => {
-      if (EventModifiersList.includes(modifier as EventModifier)) {
+      if (EventModifiers.includes(modifier as EventModifier)) {
         acc.push(modifier as EventModifier);
       }
 
@@ -173,7 +166,7 @@ export const extractEventDetails = (
 };
 
 export const setEventListener = (
-  fullEvent: string,
+  key: string,
   event: string,
   value: unknown,
   element: Element,
@@ -226,7 +219,7 @@ export const setEventListener = (
   }
 
   // the listener should be inserted in the element
-  (element as ElementWithEvents).__events__[fullEvent] = callback;
+  (element as ElementWithEvents).__events__[key] = callback;
 
   element.addEventListener(event, callback, options);
 };

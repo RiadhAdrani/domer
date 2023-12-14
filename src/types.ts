@@ -1,10 +1,10 @@
-import { EventModifiersList } from './index.js';
+import { EventModifiers } from './index.js';
 
 export interface CreateElementProps extends Record<string, unknown> {
   ns?: string;
 }
 
-export type EventModifier = (typeof EventModifiersList)[number];
+export type EventModifier = (typeof EventModifiers)[number];
 
 export type EventHandler = (e: Event) => void;
 
