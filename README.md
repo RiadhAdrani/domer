@@ -1,11 +1,11 @@
-# package-ts
+# domer
 
-Template generated with `@riadh-adrani/create-package`
+A library to build DOM faster.
 
-## TODO
+### Install
 
-- Rename `npmignore` to `.npmignore`
-- Rename `gitignore` to `.gitignore`
-- Add `NPM` secret key to Github.
-- Provide read/write access for github actions. 
+Add to your project using :
 
+```bash
+npm i @riadh-adrani/domer
+```
