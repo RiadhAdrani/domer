@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-### Added
+### Fixed
+
+- `setEventListener` : remove any existing event with the same `key` before adding a new one
+
+## 0.0.1 - 2023-12-14
 
 - initial library prototype
 - `element` : create DOM element.
