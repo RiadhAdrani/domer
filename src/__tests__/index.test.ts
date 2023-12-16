@@ -311,6 +311,18 @@ describe('setEventListener', () => {
     expect(cb).toHaveBeenCalledOnce();
   });
 
+  it('should remove old event listener before adding a new one', () => {
+    const old = vitest.fn();
+
+    setEventListener('click', 'click', old, el);
+
+    setEventListener('click', 'click', cb, el);
+
+    el.click();
+
+    expect(old).toHaveBeenCalledTimes(0);
+  });
+
   it('should add callback to event store', () => {
     setEventListener('clicker', 'click', cb, el);
 

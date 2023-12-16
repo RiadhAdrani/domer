@@ -22,10 +22,18 @@ const ignoredProps = ['ns'];
 
 const classPrefix = 'class:';
 
+/**
+ * set library global configuration.
+ *
+ * everything is ``ON`` by default.
+ */
 export const setConfig = (config: LibraryConfig = {}) => {
   $config = config;
 };
 
+/**
+ * create a tagged DOM element
+ */
 export const element = <E = Element>(
   tag: string,
   props: CreateElementProps = {},
@@ -82,10 +90,16 @@ export const element = <E = Element>(
   return el as E;
 };
 
+/**
+ * create a text node
+ */
 export const text = (data: unknown = ''): Text => {
   return document.createTextNode(`${data}`);
 };
 
+/**
+ * resolve a collection of class properties and return the resulting class string.
+ */
 export const resolveClassProps = (props: Array<{ value: unknown; key: string }>): string => {
   // sort and filter
   const sorted = [
@@ -109,6 +123,9 @@ export const resolveClassProps = (props: Array<{ value: unknown; key: string }>)
     .join(' ');
 };
 
+/**
+ * checks if the given prop is class-related
+ */
 export const isClassProp = (prop: string): boolean => {
   if (prop === 'class') return true;
 
@@ -127,6 +144,11 @@ const atVueEventRegex = /@[a-zA-Z][a-zA-Z0-9\-:]*/;
 const onReactEventRegex = /on[a-zA-Z][a-zA-Z0-9\-:]*/;
 const onSvelteEventRegex = /on:[a-zA-Z][a-zA-Z0-9\-:]*/;
 
+/**
+ * extract event details, an object with ``name`` and ``modifiers``
+ *
+ * or ``false`` otherwise.
+ */
 export const extractEventDetails = (
   prop: string,
 ): { event: string; modifiers: Array<EventModifier> } | false => {
@@ -165,6 +187,9 @@ export const extractEventDetails = (
   return { event, modifiers };
 };
 
+/**
+ * set an event listener with a unique ``key``
+ */
 export const setEventListener = (
   key: string,
   event: string,
@@ -218,22 +243,32 @@ export const setEventListener = (
     options.passive = true;
   }
 
+  removeEventListener(key, event, element);
+
   // the listener should be inserted in the element
   (element as ElementWithEvents).__events__[key] = callback;
 
   element.addEventListener(event, callback, options);
 };
 
-export const removeEventListener = (fullEvent: string, event: string, element: Element) => {
+/**
+ * remove the event listener with the provided ``key`` and `event`
+ */
+export const removeEventListener = (key: string, event: string, element: Element) => {
   const events = (element as ElementWithEvents)?.__events__;
 
-  const callback = events?.[fullEvent];
+  const callback = events?.[key];
 
   if (callback) {
     element.removeEventListener(event, callback);
+
+    delete events[key];
   }
 };
 
+/**
+ * ``add`` or ``update`` an attribute within a DOM element
+ */
 export const setAttribute = (attr: string, value: unknown, el: Element) => {
   let v = `${value}`;
 
@@ -279,6 +314,9 @@ export const setAttribute = (attr: string, value: unknown, el: Element) => {
   }
 };
 
+/**
+ * remove an attribute from a DOM element
+ */
 export const removeAttribute = (attr: string, el: Element) => {
   if (toggleableAttributes.includes(attr)) {
     el.toggleAttribute(attr, false);
@@ -293,6 +331,9 @@ export const removeAttribute = (attr: string, el: Element) => {
   }
 };
 
+/**
+ * transform an attribute to a DOM property or camelcase it otherwise
+ */
 export const attrToProp = (attr: string): string => {
   // we check if key exist in the htmlToDom map
   let pair: { key: string; value: string } | undefined;
@@ -312,22 +353,34 @@ export const attrToProp = (attr: string): string => {
   return camelcase(attr.replaceAll(':', ' '));
 };
 
+/**
+ * insert a ``node`` dom within another ``parent`` node, in a (optional) given ``position``
+ */
 export const insertNode = (node: Node, parent: Node, position = -1) => {
   const child = parent.childNodes.item(position);
 
   parent.insertBefore(node, child);
 };
 
+/**
+ * change `node` position within its parent
+ */
 export const changeNodePosition = (node: Node, position: number) => {
   if (!node.parentNode) return;
 
   insertNode(node, node.parentNode, position);
 };
 
+/**
+ * remove a node from the DOM tree
+ */
 export const removeNode = (node: ChildNode) => {
   node.remove();
 };
 
+/**
+ * update text node data
+ */
 export const setText = (data: unknown, node: Text) => {
   node.data = `${data}`;
 };
