@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/RiadhAdrani/domer"
   },
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
