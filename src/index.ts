@@ -368,6 +368,11 @@ export const insertNode = (node: Node, parent: Node, position = -1) => {
 export const changeNodePosition = (node: Node, position: number) => {
   if (!node.parentNode) return;
 
+  const before = node.parentNode.childNodes.item(position);
+  const current = node.parentNode.childNodes.item(position - 1);
+
+  if (before === node || current === node) return;
+
   insertNode(node, node.parentNode, position);
 };
 

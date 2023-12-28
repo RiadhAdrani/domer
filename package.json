@@ -20,6 +20,7 @@
   ],
   "keywords": [],
   "scripts": {
+    "dev": "vite",
     "test": "vitest",
     "test:once": "vitest run",
     "build:clean": "rm -rf dist",

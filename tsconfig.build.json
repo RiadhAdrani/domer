@@ -1,6 +1,14 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/*.test.ts", "**/*.test.tsx", "./src/dev", "./docs", "dist", "build"],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "./src/dev",
+    "./docs",
+    "dist",
+    "build",
+    "playground"
+  ],
   "compilerOptions": {
     "declaration": true,
     "removeComments": true
