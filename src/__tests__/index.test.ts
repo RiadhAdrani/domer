@@ -139,6 +139,7 @@ describe('changeNodePosition', () => {
   let n3 = text(3);
   let n4 = text(4);
   let n5 = text(5);
+  let input = element<HTMLInputElement>('input');
 
   beforeEach(() => {
     n1 = text(1);
@@ -146,16 +147,33 @@ describe('changeNodePosition', () => {
     n3 = text(3);
     n4 = text(4);
     n5 = text(5);
+    input = element('input');
 
     document.body.innerHTML = '';
 
-    [n1, n2, n3, n4, n5].forEach(it => document.body.append(it));
+    [n1, n2, n3, n4, n5, input].forEach(it => document.body.append(it));
   });
 
   it('should change node position', () => {
     changeNodePosition(n1, 3);
 
-    expect(document.body.innerHTML).toBe('23145');
+    expect(document.body.innerHTML).toBe('23145<input>');
+  });
+
+  it('should not make input element loose focus when reinserting the node in the same position', () => {
+    input.focus();
+
+    changeNodePosition(input, 5);
+
+    expect(document.activeElement).toStrictEqual(input);
+  });
+
+  it('should not make input element loose focus when reinserting the node in the same position (+1)', () => {
+    input.focus();
+
+    changeNodePosition(input, 6);
+
+    expect(document.activeElement).toStrictEqual(input);
   });
 });
 
