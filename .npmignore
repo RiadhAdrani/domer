@@ -9,6 +9,7 @@ CHANGELOG.md
 README.md
 vscode
 docs
+playground
 index.html
 src/**/*.test.js
 src/**/*.test.ts
