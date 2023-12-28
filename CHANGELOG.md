@@ -4,20 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.0.3 - 2023-12-28
 ### Fixed
-
 - `changeNodePosition` checks if the element to be replaced is the same as the one being moved before changing its position.
 
 ## 0.0.2 - 2023-12-16
-
 ### Fixed
-
 - `setEventListener` : remove any existing event with the same `key` before adding a new one
 
 ## 0.0.1 - 2023-12-14
-
 ### Added
-
 - initial library prototype
 - `element` : create DOM element.
 - `text` : create text node.
