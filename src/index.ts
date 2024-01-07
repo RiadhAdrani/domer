@@ -5,6 +5,7 @@ import {
   LibraryConfig,
   EventHandler,
   ElementWithEvents,
+  Tag,
 } from './types.js';
 import { hasProperty, isArray } from '@riadh-adrani/obj-utils';
 
@@ -35,7 +36,7 @@ export const setConfig = (config: LibraryConfig = {}) => {
  * create a tagged DOM element
  */
 export const element = <E = Element>(
-  tag: string,
+  tag: Tag,
   props: CreateElementProps = {},
   children: Array<unknown> = [],
 ): E => {

@@ -28,3 +28,7 @@ export interface LibraryConfig {
 export interface ElementWithEvents extends Element {
   __events__: Record<string, EventHandler>;
 }
+
+export type StringWithAutoComplete<T> = T | (string & Record<never, never>);
+
+export type Tag = StringWithAutoComplete<keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap>;
