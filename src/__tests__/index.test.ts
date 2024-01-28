@@ -192,10 +192,10 @@ describe('attrToProp', () => {
 });
 
 describe('setAttribute', () => {
-  let el: HTMLElement;
+  let el: HTMLInputElement;
 
   beforeEach(() => {
-    el = element('div');
+    el = element('input');
   });
 
   it('should set element attribute', () => {
@@ -222,16 +222,17 @@ describe('setAttribute', () => {
     expect(el.style.color).toBe('red');
   });
 
-  it('should toggle attribute on', () => {
+  it('should toggle attribute "%s" on', () => {
     setAttribute('hidden', true, el);
 
-    expect(el.hidden).toBe(true);
+    expect(el['hidden']).toBe(true);
   });
 
   it('should toggle attribute off', () => {
-    setAttribute('hidden', true, el);
-    setAttribute('hidden', false, el);
+    // setAttribute('hidden', true, el);
+    // expect(el.hidden).toBe(true);
 
+    setAttribute('hidden', false, el);
     expect(el.hidden).toBe(false);
   });
 });

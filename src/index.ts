@@ -271,13 +271,14 @@ export const removeEventListener = (key: string, event: string, element: Element
  * ``add`` or ``update`` an attribute within a DOM element
  */
 export const setAttribute = (attr: string, value: unknown, el: Element) => {
-  let v = `${value}`;
+  let v: string | boolean = `${value}`;
 
   let set = true;
 
   if (toggleableAttributes.includes(attr)) {
-    // toggle attribute
-    el.toggleAttribute(attr, Boolean(value));
+    v = Boolean(value);
+
+    el.toggleAttribute(attr, v);
   } else {
     if (attr === 'style' && (el as HTMLElement).style) {
       const html = el as HTMLElement;
@@ -309,8 +310,9 @@ export const setAttribute = (attr: string, value: unknown, el: Element) => {
   }
 
   const prop = attrToProp(attr);
+  const hasProp = prop in el;
 
-  if (set && hasProperty(el, prop)) {
+  if (set && hasProp) {
     (el as unknown as Record<string, unknown>)[prop] = v;
   }
 };
@@ -328,7 +330,7 @@ export const removeAttribute = (attr: string, el: Element) => {
   const prop = attrToProp(attr);
 
   if (hasProperty(el, prop)) {
-    delete (el as unknown as Record<string, unknown>)[prop];
+    (el as unknown as Record<string, unknown>)[prop] = null;
   }
 };
 
