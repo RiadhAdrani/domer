@@ -1,4 +1,4 @@
-# domer
+# domer [![CI/CD](https://github.com/RiadhAdrani/domer/actions/workflows/checks.yml/badge.svg)](https://github.com/RiadhAdrani/domer/actions/workflows/checks.yml) [![npm](https://badgen.net/npm/v/@riadh-adrani/domer)](https://www.npmjs.com/package/@riadh-adrani/domer)
 
 A library to build DOM faster.
 
